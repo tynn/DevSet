@@ -1,0 +1,7 @@
+<manifest xmlns:a="http://schemas.android.com/apk/res/android" package="dev.set">
+    <permission a:name="dev.set.locale" a:protectionLevel="signature" />
+    <uses-permission a:name="android.permission.CHANGE_CONFIGURATION" />
+    <application a:label="DevSet">
+        <receiver a:exported="true" a:permission="dev.set.locale" a:name=".locale" />
+    </application>
+</manifest>

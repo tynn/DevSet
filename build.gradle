@@ -1,0 +1,71 @@
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.5.+'
+    }
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "0.1"
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'manifest.xml'
+            java.srcDirs = [projectDir]
+            java.excludes = [buildDir.toString()]
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+        }
+    }
+
+    variantFilter { variant ->
+        if (!variant.buildType.name.equals('debug'))
+            variant.setIgnore(true)
+    }
+
+    testBuildType 'release'
+
+    afterEvaluate { project ->
+        tasks.remove uninstallAll
+        applicationVariants.each { variant ->
+            /*variant.assemble << {
+                copy {
+                    from variant.outputs*.outputFile
+                    into projectDir
+                }
+            }*/
+            variant.install << {
+                exec {
+                    executable = adbExe
+                    args 'shell', 'pm', 'grant'
+                    args variant.applicationId
+                    args 'android.permission.CHANGE_CONFIGURATION'
+                }
+                println ''
+                print 'usage: adb shell am broadcast -n '
+                print variant.applicationId
+                println '/.locale --es l {locale}'
+            }
+        }
+    }
+}
+
