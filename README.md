@@ -3,8 +3,8 @@
 
 It's not to easy to set the locale of an emulator or device from `ADB`.
 
-*DevSet* provides a `BroadcastReceiver` to do so with one (simple) command.
-Be careful here, everyone can call it!
+*DevSet* provides a system protected `BroadcastReceiver` to do so with one
+(simple) command.
 
 
 ### Setting the locale
@@ -23,4 +23,8 @@ Gradle handles the installation and the permission granting with
 Granting the permission is done with
 
     adb shell pm grant dev.set android.permission.CHANGE_CONFIGURATION
+
+##### Required permission
+The receiver itself requires the system permission `CHANGE_CONFIGURATION` to
+protect against abuse.
 

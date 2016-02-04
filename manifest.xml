@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="dev.set">
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <application android:label="DevSet">
-        <receiver android:exported="true" android:name=".locale" />
+        <receiver android:name=".locale" android:exported="true"
+            android:permission="android.permission.CHANGE_CONFIGURATION" />
     </application>
 </manifest>
