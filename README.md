@@ -1,30 +1,33 @@
 # DevSet
-###### Set the device locale with `ADB`
+###### Set the device locale with ADB
 
-It's not to easy to set the locale of an emulator or device from `ADB`.
+It's not to easy to set the locale of an emulator or device from ADB directly.
 
-*DevSet* provides a system protected `BroadcastReceiver` to do so with one
+*DevSet* provides a system protected `BroadcastReceiver` to do so with just one
 (simple) command.
 
 
-### Setting the locale
-A `BroadcastReceiver` is used to handle the locale input from `ADB`.
-`{locale}` should be a representation of `Locale` like *en*, *en_US* or *en-US*.
+### Usage
 
     adb shell am broadcast -n dev.set/.locale --es l {locale}
 
+`{locale}` must be a representation or tag of a `java.util.Locale`
+like *en*, *en_US* or *en-US*.
+
+##### Required permission
+The receiver itself requires the system permission
+`android.permission.CHANGE_CONFIGURATION` to protect against abuse.
+
 
 ### Installation
-Gradle handles the installation and the permission granting with
 
     gradle install
 
+Gradle handles the installation and grants the permission needed to change the
+device locale.
+
 ##### Granting the permission
-Granting the permission is done with
+Granting the permission manually can be done with
 
     adb shell pm grant dev.set android.permission.CHANGE_CONFIGURATION
-
-##### Required permission
-The receiver itself requires the system permission `CHANGE_CONFIGURATION` to
-protect against abuse.
 
