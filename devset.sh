@@ -1,6 +1,6 @@
 #!/bin/sh
-usage () echo "usage: $0 command [arguments]"
-commands() echo "  l locale"
+usage(){ echo "usage: $0 command [arguments]"; }
+commands(){ echo "  l locale"; }
 [ $# -lt 1 ] && usage && exit 1
 case "${1#-}" in
 	l) argc=1 ; exec="adb shell am broadcast -n dev.set/.locale --es l" ;;
