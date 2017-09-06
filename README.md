@@ -17,6 +17,7 @@ like *en*, *en_US* or *en-US*.
 ##### Required permission
 The receiver itself requires the system permission
 `android.permission.CHANGE_CONFIGURATION` to protect against abuse.
+The *ADB* shell already has this permission granted.
 
 
 ### Installation
@@ -26,8 +27,16 @@ The receiver itself requires the system permission
 Gradle handles the installation and grants the permission needed to change the
 device locale.
 
-##### Granting the permission
+#### Granting the permission
+
+##### From Android Oreo
+Granting the permission must be done by the user. Just start the manager with
+
+    adb shell am start -a android.settings.action.MANAGE_WRITE_SETTINGS
+
+and allow *DevSet* to write the settings.
+
+##### Up to Android Nougat
 Granting the permission manually can be done with
 
     adb shell pm grant dev.set android.permission.CHANGE_CONFIGURATION
-
