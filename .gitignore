@@ -5,6 +5,4 @@
 .gradle
 .idea
 build
-gradle
-gradlew*
 local.properties
