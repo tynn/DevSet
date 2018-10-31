@@ -22,7 +22,13 @@ The *ADB* shell already has this permission granted.
 
 ### Installation
 
-    gradle install
+On Linux/Mac:
+
+    ./gradlew install
+
+On Windows:
+
+    gradlew install
 
 Gradle handles the installation and grants the permission needed to change the
 device locale.
